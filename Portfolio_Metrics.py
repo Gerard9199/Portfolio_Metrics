@@ -11,8 +11,7 @@ today = date.today()
 start = today.replace(year=today.year - Year)
 Shares = []
 composite = '^IXIC'
-data = pd.read_csv('C:/xampp/csv/dataset_github.csv')
-#data = pd.read_csv("dataset_github.csv") this is for jupyter
+data = pd.read_csv('C:/xampp/csv/dataset_github.csv')#file path
 data = data.loc[(data['RSI'] > 20) & (data['RSI']< 90) & (data['STOCH'] > 10) & (data['STOCH']< 90) & (data['SHARPE'] < 10) & (data['SHARPE']> 0) & (data['TREYNOR'] > 0) & (data['TREYNOR']< 80) & (data['P/VL'] > 0) & (data['P/VL']< 3.1)]
 df = Metrics.normalize(data)
 df = Metrics.clustering(df)
@@ -35,8 +34,7 @@ means = selected.groupby('CLUSTERS').mean()
 print(means)
 k = int(input("Enter the optimal cluster: "))
 selected_portfolio = selected[selected['CLUSTERS'] == k]
-#portfolio = (np.random.choice(selected_portfolio['TICKER'], 5, replace=False)).tolist()
-portfolio = ['AAPL','FB','AMZN','MSFT','GOOGL']
+portfolio = (np.random.choice(selected_portfolio['TICKER'], 5, replace=False)).tolist()
 prices = yf.download(portfolio, start = start, end = today, interval="1d" )['Adj Close']
 prices[composite] = yf.download(composite, start = start, end = today, interval="1d" )['Adj Close']
 Last_price = yf.download(portfolio, today)['Adj Close']
