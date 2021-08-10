@@ -13,7 +13,7 @@ Shares = []
 composite = '^IXIC'
 data = pd.read_csv('C:/xampp/csv/dataset_github.csv')#file path
 data = data.loc[(data['RSI'] > 20) & (data['RSI']< 90) & (data['STOCH'] > 10) & (data['STOCH']< 90) & (data['SHARPE'] < 10) & (data['SHARPE']> 0) & (data['TREYNOR'] > 0) & (data['TREYNOR']< 80) & (data['P/VL'] > 0) & (data['P/VL']< 3.1)]
-df = Metrics.normalize(data)
+df = Metrics.standardization(data)
 df = Metrics.clustering(df)
 n = data.shape[1]
 data.insert(n, "CLUSTERS",df['CLUSTERS'])
@@ -23,7 +23,7 @@ means = data.groupby('CLUSTERS').mean()
 print(means)
 k = int(input("Enter the optimal cluster: "))
 selected = data[data['CLUSTERS'] == k]
-portfolio = Metrics.normalize(selected)
+portfolio = Metrics.standardization(selected)
 portfolio = Metrics.clustering(portfolio)
 selected = selected.drop(['CLUSTERS'], axis=1)
 n = selected.shape[1]
