@@ -10,8 +10,8 @@ Year = int(input("Enter the years to calculate: "))
 today = date.today()
 start = today.replace(year=today.year - Year)
 Shares = []
-composite = '^IXIC'
-data = pd.read_csv('C:/xampp/csv/dataset_github.csv')#file path
+composite = '^IXIC' #composite for nasdaq database
+data = pd.read_csv('C:/xampp/csv/dataset_github.csv')
 data = data.loc[(data['RSI'] > 20) & (data['RSI']< 90) & (data['STOCH'] > 10) & (data['STOCH']< 90) & (data['SHARPE'] < 10) & (data['SHARPE']> 0) & (data['TREYNOR'] > 0) & (data['TREYNOR']< 80) & (data['P/VL'] > 0) & (data['P/VL']< 3.1)]
 df = Metrics.standardization(data)
 df = Metrics.clustering(df)
@@ -46,7 +46,8 @@ print(portfolio)
 for i in range(0, len(portfolio)):
             n = int(input("Enter the quantity of shares for {} ".format(portfolio[i])))
             Shares.append(n)
-Ponderation, Average_Daily_Return, Portfolio_Daily_Risk, Portfolio_Annual_Return, Portfolio_Annual_Risk = Metrics.risk(portfolio, composite, prices, Last_price, Risk_Free_Rate, Shares, Year)
+Ponderation, Average_Daily_Return, Portfolio_Daily_Risk, Portfolio_Annual_Return, Portfolio_Annual_Risk = Metrics.risk(portfolio, composite, prices, Last_price, Risk_Free_Rate, sum(Shares), Year)
 print(f"Portfolio Annual Return: {round((float(Metrics.cleaner(Portfolio_Annual_Return)) * 100),2)}%")
 print(f"Portfolio Daily Risk: {round((float(Metrics.cleaner(Portfolio_Daily_Risk)) * 100),2)}%")
 print(f"Portfolio Annual Risk: {round((float(Metrics.cleaner(Portfolio_Annual_Risk)) * 100),2)}%")
+
