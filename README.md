@@ -11,3 +11,7 @@ The clustering will be used two times.
 
 You need to select the optimal cluster based on the mean of each cluster.
 Once the optimal cluster is selected, the prices will be downloaded and the portfolio metrics will be created.
+
+Also, you need to be sure about the composite in the lines, it will depend of the database you will use.
+
+Thanks for using this code.
