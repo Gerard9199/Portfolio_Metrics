@@ -46,7 +46,7 @@ print(portfolio)
 for i in range(0, len(portfolio)):
             n = int(input("Enter the quantity of shares for {} ".format(portfolio[i])))
             Shares.append(n)
-Ponderation, Average_Daily_Return, Portfolio_Daily_Risk, Portfolio_Annual_Return, Portfolio_Annual_Risk = Metrics.risk(portfolio, composite, prices, Last_price, Risk_Free_Rate, sum(Shares), Year)
+Ponderation, Average_Daily_Return, Portfolio_Daily_Risk, Portfolio_Annual_Return, Portfolio_Annual_Risk = Metrics.risk(portfolio, composite, prices, Last_price, Risk_Free_Rate, Shares, Year)
 print(f"Portfolio Annual Return: {round((float(Metrics.cleaner(Portfolio_Annual_Return)) * 100),2)}%")
 print(f"Portfolio Daily Risk: {round((float(Metrics.cleaner(Portfolio_Daily_Risk)) * 100),2)}%")
 print(f"Portfolio Annual Risk: {round((float(Metrics.cleaner(Portfolio_Annual_Risk)) * 100),2)}%")
