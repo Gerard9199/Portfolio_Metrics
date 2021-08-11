@@ -37,10 +37,8 @@ selected_portfolio = selected[selected['CLUSTERS'] == k]
 portfolio = (np.random.choice(selected_portfolio['TICKER'], 5, replace=False)).tolist()
 prices = yf.download(portfolio, start = start, end = today, interval="1d" )['Adj Close']
 prices[composite] = yf.download(composite, start = start, end = today, interval="1d" )['Adj Close']
+prices, portfolio = null_portfolio(prices, portfolio, selected_portfolio)
 Last_price = yf.download(portfolio, today)['Adj Close']
-prices = prices.fillna(method='bfill')
-prices = prices.fillna(prices.mean())
-Last_price, prices, portfolio = Metrics.null_portfolio(prices, portfolio, selected_portfolio)
 print("PORTFOLIO")
 print(portfolio)
 for i in range(0, len(portfolio)):
